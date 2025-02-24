@@ -1,0 +1,13 @@
+rootProject.name = 'wapp'
+
+
+include ':entrypoints'
+include ':postgres'
+include ':models'
+include ':uses-cases'
+
+project(':entrypoints')?.projectDir = file('./infrastructure/entrypoints')
+project(':postgres')?.projectDir = file('./infrastructure/driven-adapters/postgres')
+project(':models')?.projectDir = file('./domain/models')
+project(':uses-cases')?.projectDir = file('./applications/uses-cases')
+
