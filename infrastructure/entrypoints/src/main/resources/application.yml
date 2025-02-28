@@ -10,6 +10,10 @@ springdoc:
 application:
   title: Whatsapp Clone
   version: 1.0.0
+  file:
+    uploads:
+      media-output:
+        path: ./uploads
 
 spring-boot:
   version: 3.4.1
@@ -32,6 +36,15 @@ spring:
       idle-timeout: 10000
       max-lifetime: 1000
       auto-commit: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI}
+  servlet:
+    multipart:
+      max-file-size: 50MB
+
 
 logging:
   level:
