@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
+public interface ChatRepository extends JpaRepository<ChatEntity, String> {
     @Query("SELECT DISTINCT c FROM ChatEntity c WHERE c.sender.id = :senderId OR c.recipient.id = :senderId ORDER BY c.createdDate DESC")
     List<ChatEntity>findChatBySenderId(@Param("senderId") Long senderId);
     @Query("SELECT DISTINCT c FROM ChatEntity c WHERE (c.sender.id = :senderId AND c.recipient.id = :recipientId) OR (c.sender.id = :recipientId AND c.recipient.id = :senderId) ORDER BY c.createdDate DESC")
