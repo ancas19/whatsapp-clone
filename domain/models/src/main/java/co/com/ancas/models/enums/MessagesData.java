@@ -13,7 +13,8 @@ public enum MessagesData {
     MESSAGE_EXCEPTION("An exception occurred, please contact support team"),
     MESSAGE_GENERAL_FORBIDDEN("You do not have permission to access this resource"),
     CHAT_NOT_FOUND("Chat not found"),
-    MESSAGE_CREATED_SUCCESSFULY("Message created successfully"),;
+    MESSAGE_CREATED_SUCCESSFULY("Message created successfully"),
+    CONTACTS_FOUND("Contacts retrieved successfully");
 
 
 

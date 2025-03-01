@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/message")
+@RequestMapping("/api/v1.0/message")
 @Tag(name = "Message", description = "Message API")
 public class MessageController {
     private final MessagesAppService messagesAppService;
