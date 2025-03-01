@@ -1,6 +1,8 @@
 package co.com.ancas.uses_cases.adapters;
 
 import co.com.ancas.models.domain.*;
+import co.com.ancas.models.enums.Messages;
+import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.ports.IChatRepositoryPort;
 import co.com.ancas.uses_cases.ports.IChatPort;
 import co.com.ancas.uses_cases.ports.IUserPorts;
@@ -34,5 +36,11 @@ public class ChatAdapter implements IChatPort {
                 .build();
         Chat chatSaved = chatRepositoryPort.save(chatToSave);
         return new ChatCreated(chatSaved.getId());
+    }
+
+    @Override
+    public Chat findChatById(String chatId) {
+        return chatRepositoryPort.findById(chatId)
+                .orElseThrow(() -> new NotFoundException(Messages.CHAT_NOT_FOUND.getMessage()));
     }
 }

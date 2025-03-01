@@ -39,6 +39,12 @@ public class ChatRepositoryAdapter implements IChatRepositoryPort {
         return mapperToChat(this.chatRepository.save(mapToChatEntity(chatToSave)));
     }
 
+    @Override
+    public Optional<Chat> findById(String chatId) {
+        return this.chatRepository.findById(chatId)
+                .map(this::mapperToChat);
+    }
+
     private Chat mapperToChat(ChatEntity save) {
         return Chat.builder()
                 .id(save.getId())
