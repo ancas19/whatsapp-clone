@@ -5,9 +5,12 @@ include ':entrypoints'
 include ':postgres'
 include ':models'
 include ':uses-cases'
+include  ':websocket'
+include  ':cloudinary'
 
 project(':entrypoints')?.projectDir = file('./infrastructure/entrypoints')
 project(':postgres')?.projectDir = file('./infrastructure/driven-adapters/postgres')
 project(':models')?.projectDir = file('./domain/models')
 project(':uses-cases')?.projectDir = file('./applications/uses-cases')
-
+project(':websocket')?.projectDir = file('./infrastructure/driven-adapters/websocket')
+project(':cloudinary')?.projectDir = file('./infrastructure/driven-adapters/cloudinary')

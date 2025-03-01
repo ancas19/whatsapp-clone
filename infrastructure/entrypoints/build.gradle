@@ -7,8 +7,11 @@ dependencies {
     implementation project(':models')
     implementation project(':postgres')
     implementation project(':uses-cases')
+    implementation project(':websocket')
+    implementation project(':cloudinary')
 
     implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
     implementation "org.springframework.boot:spring-boot-starter-validation:${springVersion}"
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.6.0'
 }
