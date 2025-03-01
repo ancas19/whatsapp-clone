@@ -31,6 +31,8 @@ public class MessageEntity  extends AuditingEntity{
     @ManyToOne
     @JoinColumn(name = "chat_id", nullable = false)
     private ChatEntity chat;
+    @Column(name = "media_file_path")
+    private String mediaFilePath;
 
 
 }

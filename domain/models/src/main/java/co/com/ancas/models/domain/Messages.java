@@ -17,4 +17,5 @@ public class Messages {
     private String senderId;
     private String recipientId;
     private Chat chat;
+    private String mediaFilePath;
 }
