@@ -24,6 +24,7 @@ public class ChatAppService {
         return Mapper.map(chatPort.createChat(Mapper.map(chatCreationRequest, ChatCreation.class)),ChatCreatedResponse.class);
     }
 
+    @Transactional(value = "whatsappTransactionManager",rollbackFor = Exception.class)
     public List<ChatInformationResponse> getChatInformationByReceiverId() {
         String currentuser = currentUser.getCurrentUserId();
         return Mapper.mapAll(chatPort.getChatInformationByReceiverId(currentuser), ChatInformationResponse.class);

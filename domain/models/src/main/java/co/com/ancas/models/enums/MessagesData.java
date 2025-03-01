@@ -1,6 +1,6 @@
 package co.com.ancas.models.enums;
 
-public enum Messages {
+public enum MessagesData {
 
     //Sucess messages
     CHAT_CREATED("Chat created successfully"),
@@ -12,13 +12,14 @@ public enum Messages {
     MESSAGE_GENERAL_NOT_FOUND("The requested resource was not found"),
     MESSAGE_EXCEPTION("An exception occurred, please contact support team"),
     MESSAGE_GENERAL_FORBIDDEN("You do not have permission to access this resource"),
-    CHAT_NOT_FOUND("Chat not found"),;
+    CHAT_NOT_FOUND("Chat not found"),
+    MESSAGE_CREATED_SUCCESSFULY("Message created successfully"),;
 
 
 
     private final String message;
 
-    Messages(String message) {
+    MessagesData(String message) {
         this.message = message;
     }
 

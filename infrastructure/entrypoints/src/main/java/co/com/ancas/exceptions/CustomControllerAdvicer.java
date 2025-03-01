@@ -1,6 +1,6 @@
 package co.com.ancas.exceptions;
 
-import co.com.ancas.models.enums.Messages;
+import co.com.ancas.models.enums.MessagesData;
 import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.response.ErrorResponse;
 import co.com.ancas.response.GeneralResponse;
@@ -37,7 +37,7 @@ public class CustomControllerAdvicer {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                 body(
                         GeneralResponse.<Map<String,String>>builder()
-                                .message(Messages.MESSAGE_ERROR_DATA_INCORRECT.getMessage())
+                                .message(MessagesData.MESSAGE_ERROR_DATA_INCORRECT.getMessage())
                                 .data(errors)
                                 .build()
                 );
@@ -50,7 +50,7 @@ public class CustomControllerAdvicer {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).
                 body(
                         GeneralResponse.<ErrorResponse>builder()
-                                .message(Messages.MESSAGE_GENERAL_NOT_FOUND.getMessage())
+                                .message(MessagesData.MESSAGE_GENERAL_NOT_FOUND.getMessage())
                                 .data(
                                         ErrorResponse.builder()
                                                 .timeStamp(LocalDate.now())
@@ -69,7 +69,7 @@ public class CustomControllerAdvicer {
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).
                 body(
                         GeneralResponse.<ErrorResponse>builder()
-                                .message(Messages.MESSAGE_GENERAL_NOT_FOUND.getMessage())
+                                .message(MessagesData.MESSAGE_GENERAL_NOT_FOUND.getMessage())
                                 .data(
                                         ErrorResponse.builder()
                                                 .timeStamp(LocalDate.now())
@@ -88,7 +88,7 @@ public class CustomControllerAdvicer {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).
                 body(
                         GeneralResponse.<ErrorResponse>builder()
-                                .message(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage())
+                                .message(MessagesData.MESSAGE_GENERAL_FORBIDDEN.getMessage())
                                 .data(
                                         ErrorResponse.builder()
                                                 .timeStamp(LocalDate.now())
@@ -106,7 +106,7 @@ public class CustomControllerAdvicer {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).
                 body(
                         GeneralResponse.<ErrorResponse>builder()
-                                .message(Messages.MESSAGE_GENERAL_FORBIDDEN.getMessage())
+                                .message(MessagesData.MESSAGE_GENERAL_FORBIDDEN.getMessage())
                                 .data(
                                         ErrorResponse.builder()
                                                 .timeStamp(LocalDate.now())
@@ -123,12 +123,12 @@ public class CustomControllerAdvicer {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
                 body(
                         GeneralResponse.<ErrorResponse>builder()
-                                .message(Messages.MESSAGE_EXCEPTION.getMessage())
+                                .message(MessagesData.MESSAGE_EXCEPTION.getMessage())
                                 .data(
                                         ErrorResponse.builder()
                                                 .timeStamp(LocalDate.now())
                                                 .details(request.getDescription(false))
-                                                .message(Messages.MESSAGE_EXCEPTION.getMessage())
+                                                .message(MessagesData.MESSAGE_EXCEPTION.getMessage())
                                                 .build()
                                 )
                                 .build()

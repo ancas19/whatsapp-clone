@@ -1,6 +1,6 @@
 package co.com.ancas.controller;
 
-import co.com.ancas.models.enums.Messages;
+import co.com.ancas.models.enums.MessagesData;
 import co.com.ancas.request.ChatCreationRequest;
 import co.com.ancas.response.ChatCreatedResponse;
 import co.com.ancas.response.ChatInformationResponse;
@@ -29,7 +29,7 @@ public class ChatController {
         return new ResponseEntity<GeneralResponse<ChatCreatedResponse>>(
                 GeneralResponse.<ChatCreatedResponse>builder()
                         .data(chatAppService.createChat(chatCreationRequest))
-                        .message(Messages.CHAT_CREATED.getMessage())
+                        .message(MessagesData.CHAT_CREATED.getMessage())
                         .status(HttpStatus.CREATED.value())
                         .build(),
                 HttpStatus.CREATED
@@ -41,7 +41,7 @@ public class ChatController {
         return new ResponseEntity<GeneralResponse<List<ChatInformationResponse>>>(
                 GeneralResponse.<List<ChatInformationResponse>>builder()
                         .data(chatAppService.getChatInformationByReceiverId())
-                        .message(Messages.CHAT_INFORMATION.getMessage())
+                        .message(MessagesData.CHAT_INFORMATION.getMessage())
                         .status(HttpStatus.OK.value())
                         .build(),
                 HttpStatus.OK
