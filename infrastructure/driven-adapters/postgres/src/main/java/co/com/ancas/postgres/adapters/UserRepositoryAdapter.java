@@ -8,6 +8,8 @@ import co.com.ancas.postgres.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserRepositoryAdapter implements IUserRepositoryPort {
@@ -21,5 +23,11 @@ public class UserRepositoryAdapter implements IUserRepositoryPort {
     @Override
     public void save(Users userTosave) {
         this.userRepository.save(Mapper.map(userTosave, UserEntity.class));
+    }
+
+    @Override
+    public Optional<Users> findById(String id) {
+        return this.userRepository.findById(id)
+                .map(userEntity -> Mapper.map(userEntity, Users.class));
     }
 }

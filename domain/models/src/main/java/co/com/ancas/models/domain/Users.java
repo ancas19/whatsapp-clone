@@ -18,5 +18,4 @@ public class Users {
     private LocalDateTime lastSeen;
     private List<Chat> chatsAsSender;
     private List<Chat> chatsAsRecipient;
-    boolean online;
 }
