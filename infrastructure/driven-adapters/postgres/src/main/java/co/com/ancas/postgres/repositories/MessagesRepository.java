@@ -14,8 +14,8 @@ import java.util.List;
 public interface MessagesRepository extends JpaRepository<MessageEntity, Long> {
 
     @Query("SELECT m FROM MessageEntity m WHERE m.chat.id = :chatId ORDER BY m.createdDate DESC")
-    List<MessageEntity> findByChatId(@Param("chatId") Long chatId);
+    List<MessageEntity> findByChatId(@Param("chatId") String chatId);
     @Modifying
     @Query("UPDATE MessageEntity m SET m.state =:newState WHERE m.chat.id = :chatId")
-    void setMessagesAsReadByChat(@Param("chatId") Long chatId, @Param("newState") MessageState newState);
+    void setMessagesAsReadByChat(@Param("chatId") String chatId, @Param("newState") MessageState newState);
 }
