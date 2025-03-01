@@ -17,6 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity  extends AuditingEntity{
+    private static final long LAST_ACTIVE_INTERVAL = 5 ;
     @Id
     private String id;
     private String firstName;
@@ -29,6 +30,6 @@ public class UserEntity  extends AuditingEntity{
     private List<ChatEntity> chatsAsRecipient;
     @Transient
     public boolean isUserOnline(){
-        return Objects.isNull(lastSeen) && lastSeen.isAfter(LocalDateTime.now().plusMinutes(2));
+        return Objects.isNull(lastSeen) && lastSeen.isAfter(LocalDateTime.now().minusMinutes(LAST_ACTIVE_INTERVAL));
     }
 }
