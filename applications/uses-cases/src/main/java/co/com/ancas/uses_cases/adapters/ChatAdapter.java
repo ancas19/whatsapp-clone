@@ -5,7 +5,6 @@ import co.com.ancas.models.ports.IChatRepositoryPort;
 import co.com.ancas.uses_cases.ports.IChatPort;
 import co.com.ancas.uses_cases.ports.IUserPorts;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 import java.util.Optional;
