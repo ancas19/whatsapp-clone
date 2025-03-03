@@ -1,9 +1,6 @@
 package co.com.ancas.beans;
 
-import co.com.ancas.models.ports.IChatRepositoryPort;
-import co.com.ancas.models.ports.ICloudinaryPort;
-import co.com.ancas.models.ports.IMessageRepositoryPort;
-import co.com.ancas.models.ports.IUserRepositoryPort;
+import co.com.ancas.models.ports.*;
 import co.com.ancas.uses_cases.adapters.ChatAdapter;
 import co.com.ancas.uses_cases.adapters.MessagesAdapter;
 import co.com.ancas.uses_cases.adapters.UserAdapter;
@@ -27,7 +24,7 @@ public class BeansConfiguration {
     }
 
     @Bean
-    public IMessagesPort messagesPort(IMessageRepositoryPort messageRepositoryPort, ICloudinaryPort cloudinaryPort, IUserPorts userPorts, IChatPort chatPorts){
-        return new MessagesAdapter(messageRepositoryPort, cloudinaryPort, userPorts, chatPorts);
+    public IMessagesPort messagesPort(IMessageRepositoryPort messageRepositoryPort, ICloudinaryPort cloudinaryPort, IUserPorts userPorts, IChatPort chatPorts, IWebSocketRepositoryPort webSocketRepositoryPort){
+        return new MessagesAdapter(webSocketRepositoryPort,messageRepositoryPort, cloudinaryPort, userPorts, chatPorts);
     }
 }

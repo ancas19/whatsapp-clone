@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -50,7 +51,8 @@ public class ChatRepositoryAdapter implements IChatRepositoryPort {
                 .id(save.getId())
                 .sender(Mapper.map(save.getSender(), Users.class))
                 .recipient(Mapper.map(save.getRecipient(), Users.class))
-                .messages(Mapper.mapAll(save.getMessages(), Messages.class))
+                .messages(Objects.isNull(save.getMessages())?null:Mapper.mapAll(save.getMessages(), Messages.class))
+                .chatname(Objects.isNull(save.getSender())?null:save.getChatName(save.getSender().getId()))
                 .build();
     }
 

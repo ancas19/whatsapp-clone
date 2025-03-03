@@ -6,6 +6,7 @@ import co.com.ancas.response.UserInformationResponse;
 import co.com.ancas.services.UserAppService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import java.util.List;
 public class UserController {
     private final UserAppService userAppService;
 
-    @GetMapping("/contacts")
+    @GetMapping(value="/contacts", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GeneralResponse<List<UserInformationResponse>>> getContacts(){
         return ResponseEntity.ok(
                 GeneralResponse.<List<UserInformationResponse>>builder()

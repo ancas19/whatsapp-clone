@@ -75,7 +75,7 @@ public class MessageController {
 
     @GetMapping("/chat/{chatId}")
     public ResponseEntity<GeneralResponse<List<MessageInformationResponse>>>getAllMessages(
-            @PathVariable("chat-id") String chatId
+            @PathVariable("chatId") String chatId
     ) {
         return ResponseEntity.ok(
                 GeneralResponse.<List<MessageInformationResponse>>builder()

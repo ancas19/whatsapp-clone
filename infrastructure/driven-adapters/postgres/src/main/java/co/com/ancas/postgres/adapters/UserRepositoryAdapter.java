@@ -39,6 +39,7 @@ public class UserRepositoryAdapter implements IUserRepositoryPort {
         return this.userRepository.findUsersExcerpSelf(userId)
                 .stream()
                 .map(userEntity -> UserInformation.builder()
+                        .id(userEntity.getId())
                         .firstName(userEntity.getFirstName())
                         .lastName(userEntity.getLastName())
                         .email(userEntity.getEmail())

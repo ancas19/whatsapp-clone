@@ -55,6 +55,8 @@ subprojects {
 		implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${springVersion}"
 		implementation "org.springframework.boot:spring-boot-starter-validation:${springVersion}"
 		testImplementation "org.springframework.security:spring-security-test:${securityMessaging}"
+		implementation "org.springframework.security:spring-security-core:${securityMessaging}"
+
 
 	}
 

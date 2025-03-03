@@ -23,8 +23,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
         in = SecuritySchemeIn.HEADER,
         flows = @OAuthFlows(
                 password = @OAuthFlow(
-                        authorizationUrl = "http://localhost:9090/realms/whatsapp-clone/protocol/openid-connect/auth",
-                        tokenUrl = "http://localhost:9090/realms/whatsapp-clone/protocol/openid-connect/token"
+                        authorizationUrl = "http://localhost:8080/realms/whatsapp-clone/protocol/openid-connect/auth",
+                        tokenUrl = "http://localhost:8080/realms/whatsapp-clone/protocol/openid-connect/token"
                 )
         )
 )

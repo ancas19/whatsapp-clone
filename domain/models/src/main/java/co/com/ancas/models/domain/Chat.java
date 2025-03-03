@@ -13,4 +13,5 @@ public class Chat {
     private Users sender;
     private Users recipient;
     private List<Messages> messages;
+    private String chatname;
 }

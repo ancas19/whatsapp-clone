@@ -34,7 +34,7 @@ public class MessagesRepositoryAdapter implements IMessageRepositoryPort {
                                 .senderId(messageEntity.getSenderId())
                                 .receiverId(messageEntity.getRecipientId())
                                 .createdAt(messageEntity.getCreatedDate())
-                                .media(null)
+                                .mediaFilePath(messageEntity.getMediaFilePath())
                 .build()
                 )
                 .toList();
