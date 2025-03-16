@@ -34,6 +34,9 @@ jobs:
       - name: Run unit tests
         run: ./gradlew test
 
+      - name: Build application
+        run: ./gradlew build
+
       - name: Docker Hub Login
         uses: docker/login-action@v2
         with:
