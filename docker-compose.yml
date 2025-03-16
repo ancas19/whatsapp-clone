@@ -27,6 +27,32 @@ services:
         - whatsapp-clone
     command:
       - "start-dev"
+  app:
+    image: ncas19/docker_whatsapp:latest
+    container_name: whatsapp-clone
+    ports:
+      - "9999:9999"
+    depends_on:
+        - postgres
+        - keycloak
+    networks:
+        - whatsapp-clone
+    environment:
+    - APP_CONTEXT_PATH=
+    - APP_PORT=
+    - CLOUDINARY_API_KEY=
+    - CLOUDINARY_API_SECRET=
+    - CLOUDINARY_CLOUD_NAME=
+    - HIBERNATE_DDL_AUTO=
+    - KEYCLOAK_ISSUER_URI=
+    - LOGGING_LEVEL=
+    - POSTGRES_DB=
+    - POSTGRES_HOST=
+    - POSTGRES_PASSWORD=
+    - POSTGRES_PORT=
+    - POSTGRES_USER=
+    - SHOW_SQL=
+    - WEBSOCKET_URL=
 
 
 networks:
