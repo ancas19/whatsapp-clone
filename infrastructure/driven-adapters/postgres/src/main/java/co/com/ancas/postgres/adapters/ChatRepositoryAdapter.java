@@ -10,6 +10,8 @@ import co.com.ancas.postgres.entities.ChatEntity;
 import co.com.ancas.postgres.entities.UserEntity;
 import co.com.ancas.postgres.repositories.ChatRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,11 +24,9 @@ public class ChatRepositoryAdapter implements IChatRepositoryPort {
     private final ChatRepository chatRepository;
 
     @Override
-    public List<ChatInformation> getChatInformationByReceiverId(String currentuser) {
-        return this.chatRepository.findChatBySenderId(currentuser)
-                .stream()
-                .map(chat -> mapToChatInformation(chat, currentuser))
-                .toList();
+    public Page<ChatInformation> getChatInformationByReceiverId(String currentuser, Pageable pageable) {
+        return this.chatRepository.findChatBySenderId(currentuser, pageable)
+                .map(chat -> mapToChatInformation(chat, currentuser));
     }
 
     @Override

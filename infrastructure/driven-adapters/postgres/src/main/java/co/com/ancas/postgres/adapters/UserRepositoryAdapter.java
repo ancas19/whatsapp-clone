@@ -7,6 +7,8 @@ import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.UserEntity;
 import co.com.ancas.postgres.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,9 +37,8 @@ public class UserRepositoryAdapter implements IUserRepositoryPort {
     }
 
     @Override
-    public List<UserInformation> findUsersExceptMe(String userId) {
-        return this.userRepository.findUsersExcerpSelf(userId)
-                .stream()
+    public Page<UserInformation> findUsersExceptMe(String userId, Pageable pageable) {
+        return this.userRepository.findUsersExcerpSelf(userId,pageable)
                 .map(userEntity -> UserInformation.builder()
                         .id(userEntity.getId())
                         .firstName(userEntity.getFirstName())
@@ -47,7 +48,6 @@ public class UserRepositoryAdapter implements IUserRepositoryPort {
                         .online(userEntity.isUserOnline())
                         .build()
 
-                )
-                .toList();
+                );
     }
 }

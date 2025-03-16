@@ -5,9 +5,12 @@ import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.request.ChatCreationRequest;
 import co.com.ancas.response.ChatCreatedResponse;
 import co.com.ancas.response.ChatInformationResponse;
+import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.uses_cases.ports.IChatPort;
 import co.com.ancas.util.CurrentUser;
+import co.com.ancas.util.Pagination;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +28,9 @@ public class ChatAppService {
     }
 
     @Transactional(value = "whatsappTransactionManager",rollbackFor = Exception.class)
-    public List<ChatInformationResponse> getChatInformationByReceiverId() {
+    public PaginationResponse<ChatInformationResponse> getChatInformationByReceiverId(Integer page, Integer size) {
         String currentuser = currentUser.getCurrentUserId();
-        return Mapper.mapAll(chatPort.getChatInformationByReceiverId(currentuser), ChatInformationResponse.class);
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return Pagination.getPaginationResponse(chatPort.getChatInformationByReceiverId(currentuser,pageable), ChatInformationResponse.class);
     }
 }

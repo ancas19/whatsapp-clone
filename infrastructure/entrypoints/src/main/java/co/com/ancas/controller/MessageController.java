@@ -7,6 +7,7 @@ import co.com.ancas.request.MediaMessageRequest;
 import co.com.ancas.request.MessageCreationRequest;
 import co.com.ancas.response.GeneralResponse;
 import co.com.ancas.response.MessageInformationResponse;
+import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.services.MessagesAppService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1.0/message")
+@RequestMapping("/v1.0/message")
 @Tag(name = "Message", description = "Message API")
 public class MessageController {
     private final MessagesAppService messagesAppService;
@@ -74,12 +75,14 @@ public class MessageController {
 
 
     @GetMapping("/chat/{chatId}")
-    public ResponseEntity<GeneralResponse<List<MessageInformationResponse>>>getAllMessages(
-            @PathVariable("chatId") String chatId
+    public ResponseEntity<GeneralResponse<PaginationResponse<MessageInformationResponse>>>getAllMessages(
+            @PathVariable("chatId") String chatId,
+            @RequestParam(defaultValue = "0", required = false, name = "page") Integer page,
+            @RequestParam(defaultValue = "10", required = false, name = "size") Integer size
     ) {
         return ResponseEntity.ok(
-                GeneralResponse.<List<MessageInformationResponse>>builder()
-                        .data(messagesAppService.findMessagesByChatId(chatId))
+                GeneralResponse.<PaginationResponse<MessageInformationResponse>>builder()
+                        .data(messagesAppService.findMessagesByChatId(chatId,page,size))
                         .message(MessagesData.CHAT_INFORMATION.getMessage())
                         .status(HttpStatus.OK.value())
                         .build()

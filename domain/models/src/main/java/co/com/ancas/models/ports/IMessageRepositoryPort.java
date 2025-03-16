@@ -3,11 +3,11 @@ package co.com.ancas.models.ports;
 import co.com.ancas.models.domain.MessageInformation;
 import co.com.ancas.models.domain.Messages;
 import co.com.ancas.models.enums.MessageState;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IMessageRepositoryPort {
     void save(Messages build);
-    List<MessageInformation> getMessagesByChatId(String chatId);
+    Page<MessageInformation> getMessagesByChatId(String chatId, Pageable pageable);
     void setMessagesToSeen(String id, MessageState messageState);
 }

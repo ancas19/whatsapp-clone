@@ -3,11 +3,14 @@ package co.com.ancas.services;
 import co.com.ancas.models.domain.UserInformation;
 import co.com.ancas.models.domain.Users;
 import co.com.ancas.models.utils.Mapper;
+import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.response.UserInformationResponse;
 import co.com.ancas.uses_cases.ports.IUserPorts;
 import co.com.ancas.util.CurrentUser;
+import co.com.ancas.util.Pagination;
 import co.com.ancas.util.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,17 +32,14 @@ public class UserAppService {
         if (email.isEmpty()){
             return;
         }
-        if(userPorts.existsByEmail(email.get())){
-            return;
-        }
         Users userTosave=userMapper.fromTokenAttributes(token.getClaims());
         userTosave.setEmail(email.get());
         userPorts.synchronizeUser(userTosave);
     }
 
     @Transactional(value = "whatsappTransactionManager",rollbackFor = Exception.class)
-    public List<UserInformationResponse> findUsersExceptMe() {
-        return Mapper.mapAll(userPorts.findUsersExceptMe(currentUser.getCurrentUserId()), UserInformationResponse.class);
+    public PaginationResponse<UserInformationResponse> findUsersExceptMe(Pageable pageable) {
+        return Pagination.getPaginationResponse(userPorts.findUsersExceptMe(currentUser.getCurrentUserId(),pageable), UserInformationResponse.class);
     }
 
 

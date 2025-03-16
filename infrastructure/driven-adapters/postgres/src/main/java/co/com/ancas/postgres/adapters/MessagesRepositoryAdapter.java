@@ -8,6 +8,8 @@ import co.com.ancas.models.utils.Mapper;
 import co.com.ancas.postgres.entities.MessageEntity;
 import co.com.ancas.postgres.repositories.MessagesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +25,8 @@ public class MessagesRepositoryAdapter implements IMessageRepositoryPort {
     }
 
     @Override
-    public List<MessageInformation> getMessagesByChatId(String chatId) {
-        return this.messagesRepository.findByChatId(chatId)
-                .stream()
+    public Page<MessageInformation> getMessagesByChatId(String chatId, Pageable pageable) {
+        return this.messagesRepository.findByChatId(chatId, pageable)
                 .map(messageEntity->MessageInformation.builder()
                                 .id(messageEntity.getId())
                                 .content(messageEntity.getContent())
@@ -36,8 +37,7 @@ public class MessagesRepositoryAdapter implements IMessageRepositoryPort {
                                 .createdAt(messageEntity.getCreatedDate())
                                 .mediaFilePath(messageEntity.getMediaFilePath())
                 .build()
-                )
-                .toList();
+                );
     }
 
     @Override

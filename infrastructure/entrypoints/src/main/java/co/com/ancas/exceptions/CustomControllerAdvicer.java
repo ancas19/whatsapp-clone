@@ -16,6 +16,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -117,6 +118,25 @@ public class CustomControllerAdvicer {
                                 .build()
                 );
     }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<GeneralResponse<ErrorResponse>> handleNoResourceFoundException(NoResourceFoundException ex, WebRequest request) {
+        log.error("No Resource Found Exception: {}", ex.getMessage(),ex);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).
+                body(
+                        GeneralResponse.<ErrorResponse>builder()
+                                .message(MessagesData.MESSAGE_GENERAL_NOT_FOUND.getMessage())
+                                .data(
+                                        ErrorResponse.builder()
+                                                .timeStamp(LocalDate.now())
+                                                .details(request.getDescription(false))
+                                                .message(ex.getMessage())
+                                                .build()
+                                )
+                                .build()
+                );
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<GeneralResponse<ErrorResponse>> handelGeneralException(Exception ex, WebRequest request) {
         log.error("Internal Server Exception: {}", ex.getMessage(),ex);

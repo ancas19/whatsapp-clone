@@ -9,8 +9,11 @@ import co.com.ancas.request.ChatStatusRequest;
 import co.com.ancas.request.MediaMessageRequest;
 import co.com.ancas.request.MessageCreationRequest;
 import co.com.ancas.response.MessageInformationResponse;
+import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.uses_cases.ports.IMessagesPort;
+import co.com.ancas.util.Pagination;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,8 +32,9 @@ public class MessagesAppService {
     }
 
     @Transactional(value = "whatsappTransactionManager",rollbackFor = Exception.class)
-    public List<MessageInformationResponse> findMessagesByChatId(String chatId){
-        return Mapper.mapAll(messagesPort.findMessagesByChatId(chatId), MessageInformationResponse.class);
+    public PaginationResponse<MessageInformationResponse> findMessagesByChatId(String chatId, Integer page, Integer size){
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return Pagination.getPaginationResponse(messagesPort.findMessagesByChatId(chatId,pageable), MessageInformationResponse.class);
     }
 
     @Transactional(value = "whatsappTransactionManager",rollbackFor = Exception.class)

@@ -7,6 +7,9 @@ import co.com.ancas.models.exceptions.NotFoundException;
 import co.com.ancas.models.ports.IUserRepositoryPort;
 import co.com.ancas.uses_cases.ports.IUserPorts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
@@ -16,7 +19,20 @@ public class UserAdapter implements IUserPorts {
 
     @Override
     public void synchronizeUser(Users userTosave) {
+        if(this.userRepositoryPort.existsByEmail(userTosave.getEmail())){
+            verifyChanges(userTosave);
+            return;
+        }
         this.userRepositoryPort.save(userTosave);
+    }
+
+    private void verifyChanges(Users userTosave) {
+        Users userFound = this.findById(userTosave.getId());
+        if(userFound.getFirstName().equals(userTosave.getFirstName()) || userFound.getLastName().equals(userTosave.getLastName())){
+            userFound.setFirstName(userTosave.getFirstName());
+            userFound.setLastName(userTosave.getLastName());
+            this.userRepositoryPort.save(userFound);
+        }
     }
 
     @Override
@@ -31,7 +47,7 @@ public class UserAdapter implements IUserPorts {
     }
 
     @Override
-    public List<UserInformation> findUsersExceptMe(String userId) {
-        return this.userRepositoryPort.findUsersExceptMe(userId);
+    public Page<UserInformation> findUsersExceptMe(String userId, Pageable pageable) {
+        return this.userRepositoryPort.findUsersExceptMe(userId,pageable);
     }
 }

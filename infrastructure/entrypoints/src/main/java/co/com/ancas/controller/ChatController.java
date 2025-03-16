@@ -5,10 +5,12 @@ import co.com.ancas.request.ChatCreationRequest;
 import co.com.ancas.response.ChatCreatedResponse;
 import co.com.ancas.response.ChatInformationResponse;
 import co.com.ancas.response.GeneralResponse;
+import co.com.ancas.response.PaginationResponse;
 import co.com.ancas.services.ChatAppService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +39,13 @@ public class ChatController {
     }
 
     @GetMapping()
-    public ResponseEntity<GeneralResponse<List<ChatInformationResponse>>> getChatsByReceiverId() {
-        return new ResponseEntity<GeneralResponse<List<ChatInformationResponse>>>(
-                GeneralResponse.<List<ChatInformationResponse>>builder()
-                        .data(chatAppService.getChatInformationByReceiverId())
+    public ResponseEntity<GeneralResponse<PaginationResponse<ChatInformationResponse>>> getChatsByReceiverId(
+            @RequestParam(defaultValue = "0", required = false, name = "page") Integer page,
+            @RequestParam(defaultValue = "10", required = false, name = "size") Integer size
+    ) {
+        return new ResponseEntity<GeneralResponse<PaginationResponse<ChatInformationResponse>>>(
+                GeneralResponse.<PaginationResponse<ChatInformationResponse>>builder()
+                        .data(chatAppService.getChatInformationByReceiverId(page,size))
                         .message(MessagesData.CHAT_INFORMATION.getMessage())
                         .status(HttpStatus.OK.value())
                         .build(),

@@ -20,13 +20,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
         type = SecuritySchemeType.OAUTH2,
         bearerFormat = "JWT",
         scheme = "bearer",
-        in = SecuritySchemeIn.HEADER,
-        flows = @OAuthFlows(
-                password = @OAuthFlow(
-                        authorizationUrl = "http://localhost:8080/realms/whatsapp-clone/protocol/openid-connect/auth",
-                        tokenUrl = "http://localhost:8080/realms/whatsapp-clone/protocol/openid-connect/token"
-                )
-        )
+        in = SecuritySchemeIn.HEADER
 )
 public class Main {
     public static void main(String[] args) {

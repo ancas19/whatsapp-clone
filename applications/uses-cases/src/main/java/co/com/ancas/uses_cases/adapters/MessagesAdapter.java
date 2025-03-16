@@ -11,6 +11,8 @@ import co.com.ancas.uses_cases.ports.IChatPort;
 import co.com.ancas.uses_cases.ports.IMessagesPort;
 import co.com.ancas.uses_cases.ports.IUserPorts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,8 +57,8 @@ public class MessagesAdapter implements IMessagesPort {
     }
 
     @Override
-    public List<MessageInformation> findMessagesByChatId(String chatId) {
-        return this.messageRepositoryPort.getMessagesByChatId(chatId);
+    public Page<MessageInformation> findMessagesByChatId(String chatId, Pageable pageable) {
+        return this.messageRepositoryPort.getMessagesByChatId(chatId, pageable);
     }
 
     @Override

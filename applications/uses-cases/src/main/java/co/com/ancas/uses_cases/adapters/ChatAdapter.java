@@ -7,6 +7,8 @@ import co.com.ancas.models.ports.IChatRepositoryPort;
 import co.com.ancas.uses_cases.ports.IChatPort;
 import co.com.ancas.uses_cases.ports.IUserPorts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +20,8 @@ public class ChatAdapter implements IChatPort {
 
 
     @Override
-    public List<ChatInformation> getChatInformationByReceiverId(String currentuser) {
-        return chatRepositoryPort.getChatInformationByReceiverId(currentuser);
+    public Page<ChatInformation> getChatInformationByReceiverId(String currentuser, Pageable pageable) {
+        return chatRepositoryPort.getChatInformationByReceiverId(currentuser,pageable);
     }
 
     @Override
