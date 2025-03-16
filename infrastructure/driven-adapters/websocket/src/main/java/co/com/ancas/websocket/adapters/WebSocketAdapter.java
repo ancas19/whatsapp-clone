@@ -17,6 +17,6 @@ public class WebSocketAdapter  implements IWebSocketRepositoryPort {
     @Override
     public void sendNotifcation(String userId, Notification notification) {
         log.info("Sending notification to user: {} with payload {}", userId, notification);
-        simpMessagingTemplate.convertAndSendToUser(userId, "/chat", notification);
+        simpMessagingTemplate.convertAndSendToUser(userId,"/chat", notification);
     }
 }
